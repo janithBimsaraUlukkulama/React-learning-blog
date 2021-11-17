@@ -1,41 +1,18 @@
 import { useState } from "react";
+import BlogList from "./BlogList";
 
 const Home = () => {
-
-    // const handleClick = () => {
-    //     console.log('hello');
-    // }
-
-    // const handleClick2 = (val) => {
-    //     console.log(val);
-    // }
-
-    // const handleClick3 = (e) => {
-    //     console.log(e);
-    // }
-
-    const [name, setName] = useState('one');
-
-    const handleClick4 = () => {
-        console.log('two');
-        setName('two');
-    }
+    const [blogs, setBlogs] = useState([
+        { title: 'First title', body: 'body one', author: 'first author', id: 1 },
+        { title: 'Second title', body: 'body two', author: 'second author', id: 2 },
+        { title: 'Thered title', body: 'body three', author: 'thered author', id: 3 },
+        { title: 'Fourth title', body: 'body four', author: 'fourth author', id: 4 },
+    ])
 
     return (
         <div className="home">
-            <h2>HomePage</h2>
-            {/* basic button */}
-            {/* <button onClick={handleClick} >Click me</button> */}
-
-            {/* dyanmic value passing use annonymus function to prewent function call in load */}
-            {/* <button onClick={() => handleClick2('hi')} >Click me</button> */}
-
-            {/* use click events */}
-            {/* <button onClick={handleClick3} >Click me</button> */}
-
-            {/* use state for dynamic value changes */}
-            <p>{name}</p>
-            <button onClick={handleClick4}>Click me</button>
+            <h1>jhbfdjks</h1>
+            <BlogList blogs={blogs} />
         </div>
     );
 }
