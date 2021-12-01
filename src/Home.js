@@ -9,19 +9,24 @@ const Home = () => {
         { title: 'Fourth title', body: 'body four', author: 'fourth author', id: 4 },
     ]);
 
+    const [name, setName] = useState('mario')
+
     const handleDelete = (id) => {
         const newBlog = blogs.filter(blog => id !== blog.id);
         setBlogs(newBlog);
     }
 
     // Runs every render of component
-    useEffect(() => { 
+    // we can use dependencies. only dependency change use effect will run. if use empty it runs first time in the rendering
+    useEffect(() => {
         console.log('useEffect');
-    });
+    }, [name]);
 
     return (
         <div className="home">
             <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />
+            <button onClick={() => setName('liza')}>Change name</button>
+            <p>{name}</p>
         </div>
     );
 }
