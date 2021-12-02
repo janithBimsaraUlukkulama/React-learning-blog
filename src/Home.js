@@ -2,31 +2,21 @@ import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        { title: 'First title', body: 'body one', author: 'first author', id: 1 },
-        { title: 'Second title', body: 'body two', author: 'second author', id: 2 },
-        { title: 'Thered title', body: 'body three', author: 'thered author', id: 3 },
-        { title: 'Fourth title', body: 'body four', author: 'fourth author', id: 4 },
-    ]);
+    const [blogs, setBlogs] = useState(null);
 
-    const [name, setName] = useState('mario')
-
-    const handleDelete = (id) => {
-        const newBlog = blogs.filter(blog => id !== blog.id);
-        setBlogs(newBlog);
-    }
-
-    // Runs every render of component
-    // we can use dependencies. only dependency change use effect will run. if use empty it runs first time in the rendering
     useEffect(() => {
-        console.log('useEffect');
-    }, [name]);
+        fetch('http://localhost:8000/blogs')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setBlogs(data)
+            });
+    }, []);
 
     return (
         <div className="home">
-            <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />
-            <button onClick={() => setName('liza')}>Change name</button>
-            <p>{name}</p>
+            {blogs && <BlogList blogs={blogs} title="All Blogs!" />}
         </div>
     );
 }
